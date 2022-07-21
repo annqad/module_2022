@@ -1,0 +1,117 @@
+.tile {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 300px;
+    height: 480px;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.imgItem {
+    margin-top: 14px;
+}
+
+.eclipse {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #1BC943;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+.stock_status {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #767272;
+
+}
+
+.price {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #767272;
+    margin-top: 10px;
+}
+
+.addToCart {
+    width: 150px;
+    height: 50px;
+    left: 309px;
+    top: 1032px;
+    background: #0E49B5;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FFFFFF;
+    margin-top: 11px;
+}
+
+.reviews {
+    width: 300px;
+    height: 86px;
+    background: #DAE2EA;
+    border-radius: 0px 0px 10px 10px;
+    margin-top: 25px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #3B3E66;
+
+}
+
+.redLike {
+    margin-top: 19px;
+    display: flex;
+    margin-left: 15px;
+}
+
+.positiveReviews {
+    margin-left: 11px;
+}
+
+.average {
+    margin-left: 44px;
+    margin-top: 6px;
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
+
+}
+
+#items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
