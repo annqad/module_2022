@@ -5,7 +5,7 @@ const displayItems = () =>{
         const $post = document.createElement('div');
         $post.className = 'tile';
         $post.innerHTML = `
-            <img class="imgItem" width="200" height="200" src="./${item.imgUrl}" alt="item">
+            <img id="${item.id}" class="imgItem " width="200" height="200" src="./${item.imgUrl}" alt="item">
             <div class="title">${item.name}</div>
             <div class="stock_status">
                 <div class="eclipse">
@@ -27,17 +27,27 @@ const displayItems = () =>{
                             d="M9.99996 17.7917L8.79163 16.6917C4.49996 12.8 1.66663 10.2333 1.66663 7.08333C1.66663 4.51667 3.68329 2.5 6.24996 2.5C7.69996 2.5 9.09163 3.175 9.99996 4.24167C10.9083 3.175 12.3 2.5 13.75 2.5C16.3166 2.5 18.3333 4.51667 18.3333 7.08333C18.3333 10.2333 15.5 12.8 11.2083 16.7L9.99996 17.7917Z"
                             fill="#F05454" />
                     </svg>
-                    <div class="positiveReviews"> <b>77% </b>Positive reviews <br> Above avarage</div>
-                    <div class="orders"> <b>547</b> orders</div>
+                    <div class="positiveReviews"> <b> ${item.orderInfo.reviews} </b>Positive reviews <br> Above avarage</div>
+                    <div class="orders"> <b>${item.orderInfo.inStock}</b> orders</div>
                 </div>
             </div>
         `;
-
         $items.appendChild($post);
     }
 };
 
+const displayModal = () => {
+    for (const item of items){
+        const $modal = document.createElement('div')
+        $modal.className = 'modal'
+        $modal.innerHTML = ` `
+    $items.appendChild($modal);
+    }
+}
+
 displayItems();
+
+
 
 const body = document.querySelector("body");
 const filterContainers = document.getElementsByClassName('filterContainer');
@@ -64,6 +74,33 @@ Array.from(imgItems).forEach((imgItem) => {
     imgItem.addEventListener('click', (e) => {
         modalOverlay.style.display = "flex";
         body.style.overflow = "hidden";
+        const itemModal = items.find((item)=> +e.target.id === item.id)
+        const imgModal = document.querySelector('imgModal')
+        imgModal.src = `${itemModal.imgUrl}`
+        const modalTitle = document.querySelector('modalTitle')
+        modalTitle.innerHTML = `${itemModal.name}`
+        const reviewsModal = document.querySelector('reviewsModal')
+        reviewsModal.innerHTML = `${itemModal.orderInfo.reviews}% `
+        const modalOrders = document.querySelector('modalOrders')
+        modalOrders.innerHTML = `${itemModal.orderInfo.inStock} `
+        const  color = document.querySelector('color')
+        color.innerHTML = `${itemModal.color} `
+        const  operatingSystem = document.querySelector('operatingSystem')
+        operatingSystem.innerHTML = `${itemModal.os} `
+        const  chip = document.querySelector('chip')
+        chip.innerHTML = `${itemModal.chip.name} `
+        const  height = document.querySelector('height')
+        height.innerHTML = `${itemModal.size.height} cm`
+        const  width = document.querySelector('width')
+        width.innerHTML = `${itemModal.size.width} cm`
+        const  depth = document.querySelector('depth')
+        depth.innerHTML = `${itemModal.size.depth} cm`
+        const  weight = document.querySelector('weight')
+        weight.innerHTML = `${itemModal.size.weight} kg`
+        const  modalPrice = document.querySelector('modalPrice')
+        modalPrice.innerHTML = `${itemModal.price} $`
+        const  stockLeft = document.querySelector('stockLeft')
+        stockLeft.innerHTML = `${itemModal.orderInfo.inStock}`
     });
 })
 
