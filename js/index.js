@@ -1,6 +1,8 @@
 const $items = document.getElementById('items');
+const inputSearch = document.getElementsByClassName('inputSearch')[0]
 
-const displayItems = () =>{
+const displayItems = (items) =>{
+    $items.innerHTML= ''
     for (const item of items) {
         const $post = document.createElement('div');
         $post.className = 'tile';
@@ -45,7 +47,7 @@ const displayModal = () => {
     }
 }
 
-displayItems();
+displayItems(items);
 
 
 
@@ -110,3 +112,10 @@ modalOverlay.addEventListener('click' ,(event) => {
     modalOverlay.style.display = "none";
     body.style.overflow = "auto";
 });
+
+inputSearch.addEventListener('input', (e)=> {
+    const value = e.target.value.toLowerCase()
+    const filteredItems = items.filter((item) => item.name.toLowerCase().includes(value))
+    console.log(filteredItems)
+    displayItems(filteredItems)
+})
