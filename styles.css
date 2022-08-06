@@ -1,3 +1,10 @@
+* {
+    font-family: 'Roboto';
+    font-style: normal;
+    margin: 0px;
+    padding: 0px;
+}
+
 .tile {
     display: flex;
     align-items: center;
@@ -22,11 +29,12 @@
     border: 1px solid #1BC943;
     border-radius: 50%;
     margin-right: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title {
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 28px;
@@ -38,18 +46,14 @@
 .stock_status {
     display: flex;
     justify-content: center;
-    font-family: 'Roboto';
-    font-style: normal;
+    align-items: center;
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     color: #767272;
-
 }
 
 .price {
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
@@ -64,13 +68,13 @@
     top: 1032px;
     background: #0E49B5;
     border-radius: 5px;
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 23px;
     color: #FFFFFF;
     margin-top: 11px;
+    border-color: #0E49B5;
+    cursor: pointer;
 }
 
 .reviews {
@@ -79,13 +83,10 @@
     background: #DAE2EA;
     border-radius: 0px 0px 10px 10px;
     margin-top: 25px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
+    font-weight: 50;
     font-size: 14px;
     line-height: 16px;
     color: #3B3E66;
-
 }
 
 .redLike {
@@ -106,7 +107,7 @@
 .orders {
     display: flex;
     flex-direction: column;
-    margin-left: 70px;
+    padding-left: 30px;
 
 }
 
@@ -114,4 +115,314 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+}
+
+.filter {
+    width: 326px;
+    border: 1px solid #E0E0E0;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.priceFilter {
+    width: 325px;
+    display: flex;
+    flex-direction: column;
+}
+
+.priceFilter>.priceTitle {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 400;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    padding: 0px 16px 0px 30px;
+    height: 45px;
+    border-bottom: 1px solid #E0E0E0;
+    display: flex;
+    background: #EDF3FF;
+}
+
+.priceTitle>svg {
+    transition: all 0.2s ease-in-out;
+}
+
+.priceTitle.opened>svg {
+    transform: rotate(90deg);
+}
+
+.priceTitle {
+    background-color: #EDF3FF;
+}
+
+.priceTitle.opened {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.rangeInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 17px;
+}
+
+.rangeInput.opened {
+    width: 320px;
+    font-size: 14px;
+    line-height: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: hidden;
+    height: 0px;
+    padding-left: 30px;
+}
+
+.priceRange {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 0px;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 13px;
+    transition: all 0.2s ease-in-out;
+}
+
+.priceRange.opened {
+    padding-top: 16px;
+    padding-bottom: 35px;
+    height: 90px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.rangeInput>.rangePrice {
+    width: 189px;
+    height: 35px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+}
+
+.settingsFilter {
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.filterTitle {
+    user-select: none;
+    cursor: pointer;
+    padding: 0px 16px 0px 30px;
+    height: 45px;
+    border-bottom: 1px solid #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #EDF3FF;
+}
+
+.filterTitle>svg {
+    transition: all 0.2s ease-in-out;
+}
+
+.filterTitle.opened>svg {
+    transform: rotate(90deg);
+}
+
+.filterTitle.opened {
+    background-color: #FFFFFF;
+}
+
+.filterTitle:last-child {
+    border-bottom: none;
+}
+
+.checkboxSettings {
+    width: 320px;
+    font-size: 14px;
+    line-height: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: hidden;
+    height: 0px;
+    padding-left: 30px;
+    transition: all 0.2s ease-in-out;
+}
+
+.checkboxSettings.opened {
+    height: 111px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+/* Customize the label (the container) */
+.container {
+    position: relative;
+    cursor: pointer;
+    padding-left: 25px;
+    width: 37%;
+    margin-bottom: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 5px;
+    top: 3px;
+    width: 3px;
+    height: 5px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.itemModal {
+    height: 491px;
+    width: 1020px;
+    background: #FFFFFF;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    display: flex;
+}
+
+.modalTitle {
+    margin-top: 35px;
+    color: #3B3E66;
+
+}
+
+.modalReviews {
+    margin-top: 21px;
+    border-radius: 10px;
+    display: flex;
+    padding-top: 19px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 16px;
+    color: #3B3E66;
+}
+
+.specs {
+    margin-top: 29px;
+    width: 200px;
+    height: 202px;
+    color: #767272;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.specs span {
+    color: #000000;
+}
+
+.specs>div {
+    margin: 15px 0px 15px 0px;
+}
+
+.modalImage {
+    height: 250px;
+    width: 250px;
+    margin: 107px 16px 134px 28px;
+}
+
+.itemPrice {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 75px;
+}
+
+.modalPrice {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    margin-bottom: 23px;
+    color: #3B3E66;
+}
+
+.leftInStock {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: #3B3E66;
+    margin-bottom: 20px;
+}
+
+.description {
+    padding: 0px 65px 0px 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: 1px solid #E2E2E2;
+    border-right: 1px solid #E2E2E2;
+}
+
+.modalOverlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    top: 0px;
+    justify-content: center;
+    align-items: center;
+    display: none;
 }
