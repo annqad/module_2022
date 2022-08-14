@@ -12,200 +12,196 @@
     <link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
 <body>
-    <div id="items">
-    </div>
-    <div class="filter">
-        <div id="priceFilter" class="priceFilter">
-            <div id="priceTitle" class="priceTitle">
-                Price
-                <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
-                        fill="black" />
-                </svg>
+    <div class="mainPage">
+        <div class="head">
+            <div class="header">
+                <img class="login" src="./images/image 1.png" alt="login">
+                <div class="cart">
+                    <div class="cartCircle"><img src="./images/cart 1.png" alt=""></div>
+                    <div class="itemsCircle">3</div>
+                </div>
             </div>
-            <div class="priceRange">
-                <div class="rangeInput">
-                    <div>From</div>
-                    <input class="rangePrice" type="text">
-                </div>
-                <div class="rangeInput">
-                    <div>To</div>
-                    <input class="rangePrice" type="text">
-                </div>
+            <img class="banner" id="banner" src="./imgages_banners/airpods_pro_banner 1.png" alt="">
+        </div>
+        <div class="searchBox">
+            <input class="inputSearch" type="text" placeholder=" Enter device name...">
+            <div class="filterCircle"><img src="./images/filter 1.png" alt=""></div>
+            <div class="settingsCircle"><img src="./images/settings 1.png" alt="settings">
             </div>
         </div>
-        <div class="settingsFilter">
-            <div id="Color" class="filterContainer">
-                <div class="filterTitle">Color
-                    <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
-                            fill="black" />
-                    </svg>
-                </div>
-                <div class="checkboxSettings">
-                    <label class="container">32 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">64 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">128 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">256 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">512 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">1 TB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">2 TB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">4 TB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
+        <div class="goods">
+            <div id="items">
             </div>
-            <div id="Memory" class="filterContainer">
-                <div class="filterTitle">Memory
-                    <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
-                            fill="black" />
-                    </svg>
+            <div class="filter">
+                <div id="priceFilter" class="priceFilter">
+                    <div id="priceTitle" class="priceTitle">
+                        Price
+                        <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
+                                fill="black" />
+                        </svg>
+                    </div>
+                    <div class="priceRange" id="priceRange">
+                        <div class="rangeInput">
+                            <div>From</div>
+                            <input class="rangePrice" type="text">
+                        </div>
+                        <div class="rangeInput">
+                            <div>To</div>
+                            <input class="rangePrice" type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="checkboxSettings">
-                    <label class="container">Red
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Black
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Blue
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Gold
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Green
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">White
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Grey
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Yellow
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-            </div>
-            <div id="OS" class="filterContainer">
-                <div class="filterTitle">OS
-                    <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
-                            fill="black" />
-                    </svg>
-                </div>
-                <div class="checkboxSettings">
-                    <label class="container">Red
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Black
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Blue
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Gold
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Green
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">White
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Grey
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">Yellow
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-            </div>
-            <div id="Display" class="filterContainer">
-                <div class="filterTitle">Display
-                    <svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
-                            fill="black" />
-                    </svg>
-                </div>
-                <div class="checkboxSettings">
-                    <label class="container">32 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">64 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">128 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">256 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">512 GB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">1 TB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">2 TB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="container">4 TB
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
+                <div class="settingsFilter">
+                    <div id="Color" class="filterContainer">
+                        <div class="filterTitle">Color
+                            <svg width="28" height="27" viewBox="0 0 28 27" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                        <div class="checkboxSettings" data-settings="color">
+                            <label class="container">Red
+                                <input type="checkbox" value="Red">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Black
+                                <input type="checkbox" value="Black">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Blue
+                                <input type="checkbox" value="Blue">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Gold
+                                <input type="checkbox" value="Gold">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Green
+                                <input type="checkbox" value="Green">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">White
+                                <input type="checkbox" value="White">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Grey
+                                <input type="checkbox" value="Gray">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Yellow
+                                <input type="checkbox" value="Yellow">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="Memory" class="filterContainer">
+                        <div class="filterTitle">Memory
+                            <svg width="28" height="27" viewBox="0 0 28 27" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                        <div class="checkboxSettings" data-settings="memory">
+                            <label class="container">32 GB
+                                <input type="checkbox" value="32">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">64 GB
+                                <input type="checkbox" value="64">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">128 GB
+                                <input type="checkbox" value="128">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">256 GB
+                                <input type="checkbox" value="256">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">512 GB
+                                <input type="checkbox" value="512">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">1 TB
+                                <input type="checkbox" value="1024">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">2 TB
+                                <input type="checkbox" value="2028">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">4 TB
+                                <input type="checkbox" value="4056">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="OS" class="filterContainer">
+                        <div class="filterTitle">OS
+                            <svg width="28" height="27" viewBox="0 0 28 27" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                        <div class="checkboxSettings" data-settings="os">
+                            <label class="container">iOS
+                                <input type="checkbox" value="IOS">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Mac OS
+                                <input type="checkbox" value="macOS">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">TvOS
+                                <input type="checkbox" value="tvOS">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">Watch OS
+                                <input type="checkbox" value="watchOS">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="Display" class="filterContainer">
+                        <div class="filterTitle">Display
+                            <svg width="28" height="27" viewBox="0 0 28 27" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.97168 18.2616L15.1118 13.2452L9.97168 8.2288L11.5541 6.68781L18.2879 13.2452L11.5541 19.8026L9.97168 18.2616Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                        <div class="checkboxSettings" data-settings="display">
+                            <label class="container"> 2-5 inch
+                                <input type="checkbox" value="[2, 5]">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">5-7 inch
+                                <input type="checkbox" value="[5, 7]">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">7-12 inch
+                                <input type="checkbox" value="[7, 12]">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">12-16 inch
+                                <input type="checkbox" value="[12, 16]">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">+16 inch
+                                <input type="checkbox" value="[16, 999]">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -249,9 +245,6 @@
                 <button class="addToCart">Add to cart</button>
             </div>
         </div>
-    </div>
-    <div class="searchBox">
-        <input class="inputSearch" type="text" placeholder=" Enter device name...">
     </div>
     <script src="./js/items.js"></script>
     <script src="./js/index.js"></script>

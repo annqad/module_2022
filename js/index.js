@@ -30,7 +30,7 @@ const displayItems = (items) =>{
                             fill="#F05454" />
                     </svg>
                     <div class="positiveReviews"> <b> ${item.orderInfo.reviews} </b>Positive reviews <br> Above avarage</div>
-                    <div class="orders"> <b>${item.orderInfo.inStock}</b> orders</div>
+                    <div class="orders"> <b>${item.orderInfo.orders}</b> orders</div>
                 </div>
             </div>
         `;
@@ -53,10 +53,11 @@ displayItems(items);
 
 const body = document.querySelector("body");
 const filterContainers = document.getElementsByClassName('filterContainer');
-const priceFilters = document.getElementsByClassName('priceFilter')
+const priceTitles = document.getElementsByClassName('priceTitle')
 const modalOverlay = document.getElementsByClassName('modalOverlay')[0]
 const itemModal = document.getElementsByClassName('itemModal')[0]
 const imgItems = document.getElementsByClassName('imgItem')
+const priceRange = document.getElementById('priceRange')
 
 Array.from(filterContainers).forEach((filterContainer) => {
     filterContainer.addEventListener('click', (e) => {
@@ -65,10 +66,10 @@ Array.from(filterContainers).forEach((filterContainer) => {
     });
 });
  
-Array.from(priceFilters).forEach((priceFilter) => {
-    priceFilter.addEventListener('click', (e) => {
-        priceFilter.children[0].classList.toggle('opened');
-        priceFilter.children[1].classList.toggle('opened');
+Array.from(priceTitles).forEach((priceTitle) => {
+    priceTitle.addEventListener('click', (e) => {
+        priceTitle.classList.toggle('opened');
+        priceRange.classList.toggle('opened');
     });
 });
  
@@ -77,31 +78,31 @@ Array.from(imgItems).forEach((imgItem) => {
         modalOverlay.style.display = "flex";
         body.style.overflow = "hidden";
         const itemModal = items.find((item)=> +e.target.id === item.id)
-        const imgModal = document.querySelector('imgModal')
+        const imgModal = document.querySelector('.imgModal')
         imgModal.src = `${itemModal.imgUrl}`
-        const modalTitle = document.querySelector('modalTitle')
+        const modalTitle = document.querySelector('.modalTitle')
         modalTitle.innerHTML = `${itemModal.name}`
-        const reviewsModal = document.querySelector('reviewsModal')
+        const reviewsModal = document.querySelector('.reviewsModal')
         reviewsModal.innerHTML = `${itemModal.orderInfo.reviews}% `
-        const modalOrders = document.querySelector('modalOrders')
-        modalOrders.innerHTML = `${itemModal.orderInfo.inStock} `
-        const  color = document.querySelector('color')
+        const modalOrders = document.querySelector('.modalOrders')
+        modalOrders.innerHTML = `${itemModal.orderInfo.orders} `
+        const  color = document.querySelector('.color')
         color.innerHTML = `${itemModal.color} `
-        const  operatingSystem = document.querySelector('operatingSystem')
+        const  operatingSystem = document.querySelector('.operatingSystem')
         operatingSystem.innerHTML = `${itemModal.os} `
-        const  chip = document.querySelector('chip')
+        const  chip = document.querySelector('.chip')
         chip.innerHTML = `${itemModal.chip.name} `
-        const  height = document.querySelector('height')
+        const  height = document.querySelector('.height')
         height.innerHTML = `${itemModal.size.height} cm`
-        const  width = document.querySelector('width')
+        const  width = document.querySelector('.width')
         width.innerHTML = `${itemModal.size.width} cm`
-        const  depth = document.querySelector('depth')
+        const  depth = document.querySelector('.depth')
         depth.innerHTML = `${itemModal.size.depth} cm`
-        const  weight = document.querySelector('weight')
+        const  weight = document.querySelector('.weight')
         weight.innerHTML = `${itemModal.size.weight} kg`
-        const  modalPrice = document.querySelector('modalPrice')
+        const  modalPrice = document.querySelector('.modalPrice')
         modalPrice.innerHTML = `${itemModal.price} $`
-        const  stockLeft = document.querySelector('stockLeft')
+        const  stockLeft = document.querySelector('.stockLeft')
         stockLeft.innerHTML = `${itemModal.orderInfo.inStock}`
     });
 })
@@ -116,6 +117,100 @@ modalOverlay.addEventListener('click' ,(event) => {
 inputSearch.addEventListener('input', (e)=> {
     const value = e.target.value.toLowerCase()
     const filteredItems = items.filter((item) => item.name.toLowerCase().includes(value))
-    console.log(filteredItems)
     displayItems(filteredItems)
+})
+
+const filter = {
+    color: [],
+    memory: [],
+    os: [],
+    display: [],
+    priceRange: [null, null],
+};
+
+const containers = document.getElementsByClassName('container');
+
+const addFilter = (settingsName, value) => {
+    filter[settingsName].push(value);
+};
+
+const removeFilter = (settingsName, value) => {
+    filter[settingsName] = filter[settingsName].filter(settings => settings !== value);
+};
+
+const hasFilters = () => {
+    return Object.values(filter).some((settings) => settings.length) || (filter.priceRange[0] || filter.priceRange[1]);
+}
+
+const filterItems = () => {
+    if (hasFilters()) {
+        const filteredItems = items.filter((item) => {
+            let flagColor = true;
+            let flagMemory = true;
+            let flagOs = true;
+            let flagDisplay = true;
+            let flagPrice = true;
+            
+            if (filter.color.length) {
+                flagColor = item.color.some(color => filter.color.includes(color));
+            } 
+    
+            if (filter.memory.length) {
+                flagMemory = filter.memory.includes(item.storage);
+            } 
+    
+            if (filter.os.length) {
+                flagOs = filter.os.includes(item.os);
+            } 
+    
+            if (filter.display.length) {
+                filter.display.forEach(([minInches, maxInches]) => {
+                    flagDisplay = minInches < item.display && maxInches > item.display;
+                });
+            }
+    
+            if (filter.priceRange[0] || filter.priceRange[1]) {
+                flagPrice = (filter.priceRange[0] || 0) <= item.price && (filter.priceRange[1] || Infinity) >= item.price; 
+            }
+    
+            return flagColor && flagMemory && flagOs && flagDisplay && flagPrice;
+        });
+        displayItems(filteredItems);
+    } else {
+        displayItems(items);
+    }
+}
+
+Array.from(containers).forEach((container)=> {
+    container.addEventListener('change', (e) => {
+        const settingsName = e.currentTarget.parentNode.dataset.settings;
+        const value = settingsName === 'display' ? JSON.parse(e.target.value) : 
+                      settingsName === 'memory' ? +e.target.value : e.target.value;
+        if (e.target.checked) {
+            addFilter(settingsName, value);
+        } else {
+            removeFilter(settingsName, value);
+        }
+
+        filterItems();
+    })
+})
+
+const rangePrice = document.getElementsByClassName('rangePrice')
+
+Array.from(rangePrice).forEach((price, index)=> {
+    price.addEventListener('input', (e) => {
+        filter.priceRange[index] = +e.target.value || null;
+        if (isNaN(+e.target.value)){
+            e.target.value = "";
+        } 
+    });
+    price.addEventListener('blur', (e)=> {
+        if (index === 0) {
+            e.target.value = e.target.value > 179 && e.target.value < 2499 ? e.target.value : "179";
+        } else {
+            e.target.value = e.target.value > 179 && e.target.value < 2499 ? e.target.value :  "2499";
+        }
+        filterItems()
+    })
 })
