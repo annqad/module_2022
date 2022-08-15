@@ -7,7 +7,7 @@ const displayItems = (items) =>{
         const $post = document.createElement('div');
         $post.className = 'tile';
         $post.innerHTML = `
-            <img id="${item.id}" class="imgItem " width="200" height="200" src="./${item.imgUrl}" alt="item">
+            <img id="${item.id}" class="imgItem" onclick="openModal(${item.id})" width="200" height="200" src="./${item.imgUrl}" alt="item">
             <div class="title">${item.name}</div>
             <div class="stock_status">
                 <div class="eclipse">
@@ -21,7 +21,7 @@ const displayItems = (items) =>{
                 <b>${item.orderInfo.inStock}</b>&nbsp;left in stock
             </div>
             <div class="price"> Price: <b> ${item.price}</b> $</div>
-            <button class="addToCart">Add to cart</button>
+            <button class="addToCart" onclick="addItemToCart(${item.id})">Add to cart</button>
             <div class="reviews modalReviews">
                 <div class="redLike">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,25 +38,45 @@ const displayItems = (items) =>{
     }
 };
 
-const displayModal = () => {
-    for (const item of items){
-        const $modal = document.createElement('div')
-        $modal.className = 'modal'
-        $modal.innerHTML = ` `
-    $items.appendChild($modal);
-    }
-}
+const openModal = (id) => {
+    modalOverlay.style.display = "flex";
+    body.style.overflow = "hidden";
+    const itemModal = items.find((item)=> id === item.id)
+    const imgModal = document.querySelector('.imgModal')
+    imgModal.src = `${itemModal.imgUrl}`
+    const modalTitle = document.querySelector('.modalTitle')
+    modalTitle.innerHTML = `${itemModal.name}`
+    const reviewsModal = document.querySelector('.reviewsModal')
+    reviewsModal.innerHTML = `${itemModal.orderInfo.reviews}% `
+    const modalOrders = document.querySelector('.modalOrders')
+    modalOrders.innerHTML = `${itemModal.orderInfo.orders} `
+    const  color = document.querySelector('.color')
+    color.innerHTML = `${itemModal.color} `
+    const  operatingSystem = document.querySelector('.operatingSystem')
+    operatingSystem.innerHTML = `${itemModal.os} `
+    const  chip = document.querySelector('.chip')
+    chip.innerHTML = `${itemModal.chip.name} `
+    const  height = document.querySelector('.height')
+    height.innerHTML = `${itemModal.size.height} cm`
+    const  width = document.querySelector('.width')
+    width.innerHTML = `${itemModal.size.width} cm`
+    const  depth = document.querySelector('.depth')
+    depth.innerHTML = `${itemModal.size.depth} cm`
+    const  weight = document.querySelector('.weight')
+    weight.innerHTML = `${itemModal.size.weight} kg`
+    const  modalPrice = document.querySelector('.modalPrice')
+    modalPrice.innerHTML = `${itemModal.price} $`
+    const  stockLeft = document.querySelector('.stockLeft')
+    stockLeft.innerHTML = `${itemModal.orderInfo.inStock}`
+};
 
 displayItems(items);
-
-
 
 const body = document.querySelector("body");
 const filterContainers = document.getElementsByClassName('filterContainer');
 const priceTitles = document.getElementsByClassName('priceTitle')
 const modalOverlay = document.getElementsByClassName('modalOverlay')[0]
 const itemModal = document.getElementsByClassName('itemModal')[0]
-const imgItems = document.getElementsByClassName('imgItem')
 const priceRange = document.getElementById('priceRange')
 
 Array.from(filterContainers).forEach((filterContainer) => {
@@ -72,40 +92,6 @@ Array.from(priceTitles).forEach((priceTitle) => {
         priceRange.classList.toggle('opened');
     });
 });
- 
-Array.from(imgItems).forEach((imgItem) => {
-    imgItem.addEventListener('click', (e) => {
-        modalOverlay.style.display = "flex";
-        body.style.overflow = "hidden";
-        const itemModal = items.find((item)=> +e.target.id === item.id)
-        const imgModal = document.querySelector('.imgModal')
-        imgModal.src = `${itemModal.imgUrl}`
-        const modalTitle = document.querySelector('.modalTitle')
-        modalTitle.innerHTML = `${itemModal.name}`
-        const reviewsModal = document.querySelector('.reviewsModal')
-        reviewsModal.innerHTML = `${itemModal.orderInfo.reviews}% `
-        const modalOrders = document.querySelector('.modalOrders')
-        modalOrders.innerHTML = `${itemModal.orderInfo.orders} `
-        const  color = document.querySelector('.color')
-        color.innerHTML = `${itemModal.color} `
-        const  operatingSystem = document.querySelector('.operatingSystem')
-        operatingSystem.innerHTML = `${itemModal.os} `
-        const  chip = document.querySelector('.chip')
-        chip.innerHTML = `${itemModal.chip.name} `
-        const  height = document.querySelector('.height')
-        height.innerHTML = `${itemModal.size.height} cm`
-        const  width = document.querySelector('.width')
-        width.innerHTML = `${itemModal.size.width} cm`
-        const  depth = document.querySelector('.depth')
-        depth.innerHTML = `${itemModal.size.depth} cm`
-        const  weight = document.querySelector('.weight')
-        weight.innerHTML = `${itemModal.size.weight} kg`
-        const  modalPrice = document.querySelector('.modalPrice')
-        modalPrice.innerHTML = `${itemModal.price} $`
-        const  stockLeft = document.querySelector('.stockLeft')
-        stockLeft.innerHTML = `${itemModal.orderInfo.inStock}`
-    });
-})
 
 itemModal.addEventListener('click', (e) => e.stopPropagation());
 
@@ -115,12 +101,13 @@ modalOverlay.addEventListener('click' ,(event) => {
 });
 
 inputSearch.addEventListener('input', (e)=> {
-    const value = e.target.value.toLowerCase()
-    const filteredItems = items.filter((item) => item.name.toLowerCase().includes(value))
-    displayItems(filteredItems)
-})
+    const value = e.target.value.toLowerCase();
+    filter.search = value;
+    filterItems();
+});
 
 const filter = {
+    search: '',
     color: [],
     memory: [],
     os: [],
@@ -135,22 +122,27 @@ const addFilter = (settingsName, value) => {
 };
 
 const removeFilter = (settingsName, value) => {
-    filter[settingsName] = filter[settingsName].filter(settings => settings !== value);
+    filter[settingsName] = filter[settingsName].filter(settings => JSON.stringify(settings) !== JSON.stringify(value));
 };
 
 const hasFilters = () => {
-    return Object.values(filter).some((settings) => settings.length) || (filter.priceRange[0] || filter.priceRange[1]);
+    return Object.values(filter).some((settings) => settings.length) || (filter.priceRange[0] || filter.priceRange[1]) || filter.search;
 }
 
 const filterItems = () => {
     if (hasFilters()) {
         const filteredItems = items.filter((item) => {
+            let flagSearch = true;
             let flagColor = true;
             let flagMemory = true;
             let flagOs = true;
             let flagDisplay = true;
             let flagPrice = true;
             
+            if (filter.search.length) {
+                flagSearch = item.name.toLowerCase().includes(filter.search);
+            } 
+
             if (filter.color.length) {
                 flagColor = item.color.some(color => filter.color.includes(color));
             } 
@@ -162,7 +154,7 @@ const filterItems = () => {
             if (filter.os.length) {
                 flagOs = filter.os.includes(item.os);
             } 
-    
+            console.log(filter.display);
             if (filter.display.length) {
                 filter.display.forEach(([minInches, maxInches]) => {
                     flagDisplay = minInches < item.display && maxInches > item.display;
@@ -173,7 +165,7 @@ const filterItems = () => {
                 flagPrice = (filter.priceRange[0] || 0) <= item.price && (filter.priceRange[1] || Infinity) >= item.price; 
             }
     
-            return flagColor && flagMemory && flagOs && flagDisplay && flagPrice;
+            return flagSearch && flagColor && flagMemory && flagOs && flagDisplay && flagPrice;
         });
         displayItems(filteredItems);
     } else {
@@ -214,3 +206,100 @@ Array.from(rangePrice).forEach((price, index)=> {
         filterItems()
     })
 })
+
+const cart = document.getElementsByClassName('cartCircle')[0]
+const shoppingCart = document.getElementsByClassName ('shoppingCart')[0]
+let counter = 0
+cart.addEventListener('click', (e)=> {
+    counter++
+    if (counter % 2 !== 0) {
+        shoppingCart.style.display = 'block';
+    } else{
+        shoppingCart.style.display = 'none';
+    }
+});
+
+const buyBtn = document.getElementsByClassName('addToCart')
+
+const cartItemsElement = document.querySelector('.cartItems');
+const itemsCircle = document.querySelector('.itemsCircle');
+const amountNumber = document.querySelector('.amountNumber');
+const priceNumber = document.querySelector('.priceNumber');
+const buyItems = document.querySelector('.buyItems');
+
+const cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};
+
+const displayCartItems = () => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    let totalAmount = 0;
+    let totalPrice = 0;
+    cartItemsElement.innerHTML = '';
+
+    Object.values(cartItems).forEach(({ item: cartItem, quantity }) => {
+        const itemElement = document.createElement('div');
+        totalAmount += quantity;
+        totalPrice += cartItem.price * quantity;
+        itemElement.className = 'itemCart';
+        itemElement.innerHTML = `
+            <div class="cartImage">
+                <img class="cartImage" src="${cartItem.imgUrl}" alt="itemCart">
+            </div>
+            <div class="itemDesc"> <span class="itemNameCart">${cartItem.name}</span> <span
+                    class="itemPriceCart">${cartItem.price}$</span></div>
+            <div class="changeAmount">
+                <div class="arrow left" style="background: ${quantity === 1 ? 'grey' : '#0E49B5'}" onclick="changeCartItem(${cartItem.id}, 'decrease')">&#60;
+                </div>
+                <div class="itemAmount">${quantity}</div>
+                <div class="arrow right" style="background: ${quantity === 4 ? 'grey' : '#0E49B5'}" onclick="changeCartItem(${cartItem.id}, 'increase')">&#62</div>
+                <div class="removeItem" onclick="changeCartItem(${cartItem.id}, 'delete')">X</div>
+            </div>
+        `;
+
+        cartItemsElement.appendChild(itemElement);
+    });
+
+    priceNumber.innerHTML = totalPrice;
+    amountNumber.innerHTML = totalAmount;
+    itemsCircle.innerHTML = totalAmount;
+
+    buyItems.disabled = !totalAmount;
+}
+
+const addItemToCart = (id) => {
+    if (cartItems[id]) {
+        cartItems[id].quantity++
+    } else {
+        cartItems[id] = {
+            item: items.find((item) => item.id === id),
+            quantity: 1,
+        };
+    }
+
+    displayCartItems();
+};
+
+const changeCartItem = (id, action) => {
+    switch (action) {
+        case 'decrease': {
+            if (cartItems[id].quantity > 1) {
+                cartItems[id].quantity--;
+            }
+            break;
+        }
+
+        case 'increase': {
+            if (cartItems[id].quantity < 4) {
+                cartItems[id].quantity++;
+            }
+            break;
+        }
+
+        case 'delete': {
+            delete cartItems[id];
+        }
+    }
+
+    displayCartItems();
+};
+
+displayCartItems();
